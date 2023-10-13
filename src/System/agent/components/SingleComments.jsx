@@ -24,7 +24,7 @@ const SingleComments = ({
                 fontWeight: "600",
               }}
               value={comment}
-              onChange={(e) => setComment((e) => e.target.value)}
+              onChange={(e) => setComment(e.target.value)}
             />
           </div>
           <div className="col-md-1 mt-2">
@@ -52,7 +52,7 @@ const SingleComments = ({
                 role="button"
                 onClick={() => {
                   setOpen(true);
-                  setCurrentComment(item);
+                  setCurrentComment(item); // single comment: Item {content: "hello", _id : "aslkdjsakh3i242"}
                 }}
               >
                 reply

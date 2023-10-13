@@ -8,7 +8,7 @@ const Reply = ({ open, setOpen, currentComment, list, auth }) => {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
   const [replies, setReplies] = useState([]);
-
+  
   const gettingReplies = async (x) => {
     try {
       setLoading(true);
@@ -66,7 +66,7 @@ const Reply = ({ open, setOpen, currentComment, list, auth }) => {
           Authorization: `Bearer ${auth?.token}`,
         },
       });
-      console.log("here is hte data", data);
+      // console.log("here is hte data", data);
       if (data.ok) {
         toast.success("removed");
         setReplies(replies.filter((i) => i._id !== x));

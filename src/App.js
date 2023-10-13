@@ -20,6 +20,8 @@ import Submit from "./System/Client/Submit";
 import OpenTickets from "./System/Client/OpenTickets";
 import PickedTickets from "./System/agent/PickedTickets";
 import SingleTicket from "./System/agent/SingleTicket";
+import AllAgentManager from "./System/Manager/AllAgent";
+import EscalateTc from "./System/Manager/EscalateTc";
 
 const App = () => {
   return (
@@ -43,6 +45,8 @@ const App = () => {
         {/* Manager Routes */}
         <Route path="/manager" element={<Manager />} />
         <Route path="/manager/all-users" element={<AllUsersManager />} />
+        <Route path="/manager/all-agents" element={<AllAgentManager />} />
+        <Route path="/manager/escalate-tickets" element={<EscalateTc />} />
 
         {/* Agent Routes */}
         <Route path="/agent" element={<Agent />} />

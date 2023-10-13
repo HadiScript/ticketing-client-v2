@@ -1,9 +1,11 @@
 import { Menu } from "antd";
 import React from "react";
 import { MdOutlineDashboard } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { PiUsersLight } from "react-icons/pi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SideNavs = () => {
+  const pathname = useLocation().pathname;
   const router = useNavigate();
   return (
     <Menu
@@ -14,9 +16,61 @@ const SideNavs = () => {
       defaultSelectedKeys={["1"]}
       mode="inline"
     >
-      <Menu.Item className="sidebar-navs" icon={<MdOutlineDashboard />}>
+      <Menu.Item
+        onClick={() => router("/manager")}
+        className={`${
+          pathname === "/manager" ? "sidebar-navs-active" : "sidebar-navs"
+        }`}
+        icon={<MdOutlineDashboard />}
+      >
         Dashboard
       </Menu.Item>
+      <Menu.Item
+        onClick={() => router("/manager")}
+        className={`mt-1 ${
+          pathname === "/manager" ? "sidebar-navs-active" : "sidebar-navs"
+        }`}
+        icon={<MdOutlineDashboard />}
+      >
+        Ticket trends
+      </Menu.Item>
+
+      {/* users */}
+      <Menu.Item
+        onClick={() => router("/manager/all-users")}
+        className={`mt-3 ${
+          pathname === "/manager/all-users"
+            ? "sidebar-navs-active"
+            : "sidebar-navs"
+        }`}
+        icon={<PiUsersLight />}
+      >
+        Clients
+      </Menu.Item>
+      <Menu.Item
+        onClick={() => router("/manager/all-agents")}
+        className={`mt-1 ${
+          pathname === "/manager/all-agent"
+            ? "sidebar-navs-active"
+            : "sidebar-navs"
+        }`}
+        icon={<PiUsersLight />}
+      >
+        Agents
+      </Menu.Item>
+
+      <Menu.Item
+        onClick={() => router("/manager/escalate-tickets")}
+        className={`mt-3 ${
+          pathname === "/manager/escalate-tickets"
+            ? "sidebar-navs-active"
+            : "sidebar-navs"
+        }`}
+        icon={<PiUsersLight />}
+      >
+        Escalating Tickets
+      </Menu.Item>
+
       <Menu.Item
         onClick={() => router("/manager/all-users")}
         className="sidebar-navs"
@@ -24,9 +78,6 @@ const SideNavs = () => {
       >
         All Users
       </Menu.Item>
-      <Menu.Item className="sidebar-navs">Managers</Menu.Item>
-      <Menu.Item className="sidebar-navs">Agents</Menu.Item>
-      <Menu.Item className="sidebar-navs">Clients</Menu.Item>
     </Menu>
   );
 };

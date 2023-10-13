@@ -2,12 +2,12 @@ import React from "react";
 import ManagerLayout from "./components/ManagerLayout";
 import AllUsersComponent from "../components/AllUsersComponent";
 
-const AllUsersManager = () => {
+const AllAgentManager = () => {
   return (
     <ManagerLayout>
-      <AllUsersComponent heading={"All Clients"} url={"/all-client"} />
+      <AllUsersComponent heading={"All Managers"} url={"/all-agent"} />
     </ManagerLayout>
   );
 };
 
-export default AllUsersManager;
+export default AllAgentManager;

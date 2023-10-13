@@ -17,6 +17,7 @@ import EscalateModal from "./components/EscalateModal";
 
 const SingleTicket = () => {
   const { id } = useParams();
+
   const [auth] = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -33,6 +34,7 @@ const SingleTicket = () => {
 
   const gettingSingleTicket = async (x) => {
     try {
+      // localhost:5000/api/by/agent/single/${id}...
       setLoading(true);
       const { data } = await axios.get(`/by/agent/single/${x}`, {
         headers: {
@@ -42,6 +44,7 @@ const SingleTicket = () => {
 
       setLoading(false);
       setSingle(data);
+      // object -> data = { ...singleTicketData,  comments : [] }
       setList(data.comments);
     } catch (error) {
       setLoading(false);

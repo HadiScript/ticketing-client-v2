@@ -10,7 +10,7 @@ const UsersBtns = () => {
 
   return (
     <Space className="site-button-ghost-wrapper mb-3" wrap>
-      <Link to={"/admin/all-users"}>
+      <Link to={`${auth?.user?.role === 'admin' ? '/admin/all-users' : '/manager/all-users'}`}>
         <Btn
           className={`${
             path === "/admin/all-users" ? "btn-active" : "btn-blue"
@@ -19,7 +19,13 @@ const UsersBtns = () => {
           All Clients
         </Btn>
       </Link>
-      <Link to={"/admin/all-agents"}>
+      <Link
+        to={`${
+          auth?.user?.role === "manager"
+            ? "/manager/all-agents"
+            : "/admin/all-agents"
+        } `}
+      >
         <Btn
           className={`${
             path === "/admin/all-agents" ? "btn-active" : "btn-blue"
@@ -28,6 +34,8 @@ const UsersBtns = () => {
           All Agents
         </Btn>
       </Link>
+
+      {/* just admins */}
       {auth && auth?.user?.role === "admin" && (
         <Link to="/admin/all-managers">
           <Btn
