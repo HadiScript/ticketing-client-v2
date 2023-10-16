@@ -25,14 +25,11 @@ const ClientLayout = ({ children }) => {
 
   const gettingCurrentClient = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:9000/api/current-client",
-        {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        }
-      );
+      const { data } = await axios.get("http://localhost:9000/api/current-client", {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      });
 
       console.log(data);
 
@@ -75,20 +72,11 @@ const ClientLayout = ({ children }) => {
             padding: "20px",
           }}
         >
-          {!breakpoints.md && (
-            <div onClick={() => setOpen(true)}> open for mobile</div>
-          )}
+          {!breakpoints.md && <div onClick={() => setOpen(true)}> open for mobile</div>}
 
           <h6>Welcome {auth?.user?.name}</h6>
           <div> profile</div>
-          <Drawer
-            title="Basic Drawer"
-            placement="left"
-            onClose={onClose}
-            open={open}
-            closable={true}
-            style={{ width: "280px" }}
-          >
+          <Drawer title="Basic Drawer" placement="left" onClose={onClose} open={open} closable={true} style={{ width: "280px" }}>
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>

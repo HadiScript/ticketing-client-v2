@@ -29,11 +29,11 @@ const Reply = ({ open, setOpen, currentComment, list, auth }) => {
     }
   };
 
-  useEffect(() => {
-    if (auth && auth?.token) {
-      gettingReplies(currentComment._id);
-    }
-  }, [auth && auth?.token, currentComment._id]);
+  // useEffect(() => {
+  //   if (auth && auth?.token) {
+  //     gettingReplies(currentComment._id);
+  //   }
+  // }, [auth && auth?.token, currentComment._id]);
 
   const addReply = async () => {
     try {

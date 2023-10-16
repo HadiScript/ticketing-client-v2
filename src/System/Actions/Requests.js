@@ -43,7 +43,6 @@ export const deleteRequest = async (url, auth) => {
   }
 };
 
-
 export const PutRequest = async (url, data, auth) => {
   try {
     const res = await axios.put(url, data, {

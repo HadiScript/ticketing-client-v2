@@ -4,6 +4,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { VscRequestChanges } from "react-icons/vsc";
 import { AiOutlineFolderOpen } from "react-icons/ai";
+import { BsPatchCheck } from "react-icons/bs";
 
 const SideNavs = () => {
   const pathname = useLocation().pathname;
@@ -17,35 +18,30 @@ const SideNavs = () => {
       defaultSelectedKeys={["1"]}
       mode="inline"
     >
-      <Menu.Item
-        className="sidebar-navs"
-        onClick={() => router("/client")}
-        icon={<MdOutlineDashboard />}
-      >
+      <Menu.Item className="sidebar-navs" onClick={() => router("/client")} icon={<MdOutlineDashboard />}>
         Dashboard
       </Menu.Item>
 
       <Menu.Item
         onClick={() => router("/client/submit-request")}
-        className={`mt-3 ${
-          pathname === "/client/submit-request"
-            ? "sidebar-navs-active"
-            : "sidebar-navs"
-        }`}
+        className={`mt-3 ${pathname === "/client/submit-request" ? "sidebar-navs-active" : "sidebar-navs"}`}
         icon={<VscRequestChanges />}
       >
         Submit Request
       </Menu.Item>
       <Menu.Item
         onClick={() => router("/client/open-request")}
-        className={`mt-1 ${
-          pathname === "/client/open-request"
-            ? "sidebar-navs-active"
-            : "sidebar-navs"
-        }`}
+        className={`mt-1 ${pathname === "/client/open-request" ? "sidebar-navs-active" : "sidebar-navs"}`}
         icon={<AiOutlineFolderOpen />}
       >
         Open Requests
+      </Menu.Item>
+      <Menu.Item
+        onClick={() => router("/client/resolved-request")}
+        className={`mt-1 ${pathname === "/client/resolved-request" ? "sidebar-navs-active" : "sidebar-navs"}`}
+        icon={<BsPatchCheck />}
+      >
+        Resolved Requests
       </Menu.Item>
 
       <Menu.Item className="sidebar-navs">Managers</Menu.Item>

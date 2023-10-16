@@ -4,7 +4,7 @@ import { BiLinkExternal } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import use2ndSla from "../../../utils/use2ndSla";
 
-const PickedTicketItems = ({ x, index }) => {
+const PickedTicketItems = ({ x, index, from = "pickedTc" }) => {
   const elapsedTime = use2ndSla(x.pickedAt);
   // const [elapsedTime, setElapsedTime] = useState(
   //   calculateElapsedTime(x.pickedAt)
@@ -39,21 +39,30 @@ const PickedTicketItems = ({ x, index }) => {
         <th scope="row">{x.pickedAt.slice(0, 10)}</th>
         <th scope="row">{x.priority}</th>
         <th scope="row">{x.createdAt.slice(0, 10)}</th>
+        <th scope="row">{x.firstSLABreach ? <span className="breached px-3">Yes</span> : "-"}</th>
         <th scope="row">
-          {x.firstSLABreach ? <span className="breached px-3">Yes</span> : "-"}
-        </th>
-        <th scope="row">
-          <span
-            className={`${elapsedTime >= 600 && "breached"} text-center px-3`}
-          >
-            {/* {formatTime(elapsedTime)} */}
-            {elapsedTime}
+          <span className={`${elapsedTime >= 600 && "breached"} text-center px-3`}>
+            {from !== "handoverTc" && from !== "assignTc" ? elapsedTime : x.secondSLABreach ? <span className="breached px-3">Yes</span> : "-"}
           </span>
         </th>
         <th>
-          <Link to={`/agent/single/${x._id}`}>
-            <BiLinkExternal role="button" />
-          </Link>
+          {from === "pickedTc" && (
+            <Link to={`/agent/single/${x._id}`}>
+              <BiLinkExternal role="button" />
+            </Link>
+          )}
+
+          {from === "handoverTc" && (
+            <Link to={`/agent/ho/single/${x._id}`}>
+              <BiLinkExternal role="button" />
+            </Link>
+          )}
+
+          {from === "assignTc" && (
+            <Link to={`/agent/ho/single/${x._id}`}>
+              <BiLinkExternal role="button" />
+            </Link>
+          )}
         </th>
       </tr>
     </>

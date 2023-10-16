@@ -6,6 +6,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import { getRequest } from "../Actions/Requests";
 import { AuthContext } from "../../context/Auth";
 import { GoLinkExternal } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const OpenTickets = () => {
   const [auth] = useContext(AuthContext);
@@ -39,10 +40,7 @@ const OpenTickets = () => {
       />
 
       <div className="table-responsive ">
-        <table
-          className="table cardStyle"
-          style={{ background: "red !important" }}
-        >
+        <table className="table cardStyle" style={{ background: "red !important" }}>
           <thead>
             <tr>
               <th scope="col"># {loading && "loading..."}</th>
@@ -59,12 +57,14 @@ const OpenTickets = () => {
               <tr key={x._id}>
                 <th scope="row">{++index}</th>
                 <td>{x.title}</td>
-                <td>{x.description}</td>
+                <td>{x.description.slice(0,100)}...</td>
                 <td>{x.category?.name}</td>
                 <td>{x.priority}</td>
                 <td>{x.createdAt.slice(0, 10)}</td>
                 <td>
-                  <GoLinkExternal />
+                  <Link to={`/client/single-request/${x._id}`}>
+                    <GoLinkExternal />
+                  </Link>
                 </td>
               </tr>
             ))}

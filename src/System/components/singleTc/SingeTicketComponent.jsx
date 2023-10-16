@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AgentLayout from "./components/AgentLayout";
 import { FaUserSecret } from "react-icons/fa";
 import { CiTimer } from "react-icons/ci";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { AuthContext } from "../../context/Auth";
-import DarkBread from "../components/DarkBread";
+import SingelItemHead from "./SingelItemHead";
+import SingleDescription from "./SingleDescription";
+import SingleComments from "./SingleComments";
+import Reply from "./Reply";
+import EscalateModal from "./EscalateModal";
+import HandoverModal from "./HandoverModal";
+import { AuthContext } from "../../../context/Auth";
 import { BsCheckAll } from "react-icons/bs";
-import { PutRequest, deleteRequest } from "../Actions/Requests";
-import SingleTicketComponent from "../components/singleTc/SingeTicketComponent";
+import { PutRequest, deleteRequest, getRequest } from "../../Actions/Requests";
+import AssignModal from "./AssignModal";
 
-const SingleTicket = () => {
-  const { id } = useParams();
-
+const SingleTicketComponent = ({ resolvedTc, id, from }) => {
   const [auth] = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -112,28 +114,32 @@ const SingleTicket = () => {
     }
   };
 
-  const resolvedTc = async () => {
-    const data = await PutRequest(`/resolved-tc/${id}`, {}, auth);
-    if (data.ok) {
-      toast.success("ticket has been resolved");
-    }
-  };
-
   return (
-    <AgentLayout>
-      <DarkBread
-        fromPath={"/agent"}
-        from={"Agent"}
-        fromIcon={<FaUserSecret className="agent-bread-text" />}
-        center={"Picked Tickets"}
-        centerIcon={<CiTimer color="white" />}
-        centerLink={"/agent/picked-request"}
-        to={id}
-        // toIcon={<CiTimer />}
+    <>
+      <SingelItemHead from={from} resolvedTc={resolvedTc} id={id} pickedtAt={single?.pickedtAt} single={single} escalatingTicket={escalatingTicket} setOpen2={setOpen2} />
+      {/* SingleTicket {id} */}
+      <SingleDescription single={single} from={from} />
+
+      <SingleComments
+        commentLoading={commentLoading}
+        comment={comment}
+        setComment={setComment}
+        addComment={addComment}
+        deleteComment={deleteComment}
+        auth={auth}
+        list={list}
+        setOpen={setOpen}
+        setCurrentComment={setCurrentComment}
       />
-      <SingleTicketComponent resolvedTc={resolvedTc} id={id} />
-    </AgentLayout>
+      <Reply open={open} setOpen={setOpen} currentComment={currentComment} list={list} auth={auth} />
+
+      <EscalateModal open={openEscalate} setOpen={setOpenEscalate} auth={auth} ticketId={id} />
+
+      <HandoverModal open={open2} setOpen={setOpen2} auth={auth} ticketId={id} />
+
+      {from === "manager" && <AssignModal open={open2} setOpen={setOpen2} auth={auth} ticketId={id} pickedBy={single.pickedBy} />}
+    </>
   );
 };
 
-export default SingleTicket;
+export default SingleTicketComponent;

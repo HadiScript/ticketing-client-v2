@@ -64,22 +64,10 @@ const EscalateTc = () => {
                 <th scope="row">{x.pickedAt.slice(0, 10)}</th>
                 <th scope="row">{x.priority}</th>
                 <th scope="row">{x.createdAt.slice(0, 10)}</th>
-                <th scope="row">
-                  {x.firstSLABreach ? (
-                    <span className="text-danger px-3">Yes</span>
-                  ) : (
-                    "-"
-                  )}
-                </th>
-                <th scope="row">
-                  {x.secondSLABreach ? (
-                    <span className="px-3 text-danger">Yes</span>
-                  ) : (
-                    "-"
-                  )}
-                </th>
+                <th scope="row">{x.firstSLABreach ? <span className="text-danger px-3">Yes</span> : "-"}</th>
+                <th scope="row">{x.secondSLABreach ? <span className="px-3 text-danger">Yes</span> : "-"}</th>
                 <th>
-                  <Link to={`/agent/single/${x._id}`}>
+                  <Link to={`/manager/single/${x._id}`}>
                     <BiLinkExternal role="button" />
                   </Link>
                 </th>

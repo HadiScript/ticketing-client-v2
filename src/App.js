@@ -22,6 +22,13 @@ import PickedTickets from "./System/agent/PickedTickets";
 import SingleTicket from "./System/agent/SingleTicket";
 import AllAgentManager from "./System/Manager/AllAgent";
 import EscalateTc from "./System/Manager/EscalateTc";
+import HandoverTickets from "./System/agent/HandoverTickets";
+import HandoverSingleTc from "./System/agent/HandoverSingleTc";
+import ResolvedTc from "./System/agent/ResolvedTc";
+import SingleTcByManager from "./System/Manager/SingleTcByManager";
+import AssignTickets from "./System/agent/AssignTickets";
+import ResolvedClientTickets from "./System/Client/ResolvedClientTickets";
+import OpenDetailTicket from "./System/Client/OpenDetailTicket";
 
 const App = () => {
   return (
@@ -47,16 +54,23 @@ const App = () => {
         <Route path="/manager/all-users" element={<AllUsersManager />} />
         <Route path="/manager/all-agents" element={<AllAgentManager />} />
         <Route path="/manager/escalate-tickets" element={<EscalateTc />} />
+        <Route path="/manager/single/:id" element={<SingleTcByManager />} />
 
         {/* Agent Routes */}
         <Route path="/agent" element={<Agent />} />
         <Route path="/agent/picked-request" element={<PickedTickets />} />
+        <Route path="/agent/handover-tickets" element={<HandoverTickets />} />
+        <Route path="/agent/resolved-tickets" element={<ResolvedTc />} />
+        <Route path="/agent/ho/single/:id" element={<HandoverSingleTc />} />
         <Route path="/agent/single/:id" element={<SingleTicket />} />
+        <Route path="/agent/assign-tickets" element={<AssignTickets />} />
 
         {/* client Routes */}
         <Route path="/client" element={<Client />} />
         <Route path="/client/submit-request" element={<Submit />} />
         <Route path="/client/open-request" element={<OpenTickets />} />
+        <Route path="/client/resolved-request" element={<ResolvedClientTickets />} />
+        <Route path="/client/single-request/:id" element={<OpenDetailTicket />} />
       </Routes>
     </>
   );
