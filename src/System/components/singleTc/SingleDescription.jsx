@@ -22,7 +22,7 @@ const SingleDescription = ({ single, from }) => {
       {from === "manager" && (
         <>
           <Descriptions.Item label="Picked by">{single?.pickedBy?.name}</Descriptions.Item>
-          <Descriptions.Item label="Reason for the escalating">{single?.movements?.find((x) => x.status === "escalated" && x.movedTo === null).why}</Descriptions.Item>
+          <Descriptions.Item label="Reason for the escalating">{single?.movements?.find((x) => x.status === "escalated" && x.movedTo === null)?.why}</Descriptions.Item>
         </>
       )}
     </Descriptions>

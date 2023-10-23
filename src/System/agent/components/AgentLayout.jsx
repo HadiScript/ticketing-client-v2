@@ -9,6 +9,7 @@ import { BsPersonFillGear } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { DefaultSider } from "../../../assets/layout";
+import { CgMenuLeft } from "react-icons/cg";
 
 const { Sider, Content, Header } = Layout;
 const { useBreakpoint } = Grid;
@@ -31,14 +32,11 @@ const AgentLayout = ({ children }) => {
 
   const gettingCurrentClient = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:9000/api/current-client",
-        {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        }
-      );
+      const { data } = await axios.get("http://localhost:9000/api/current-client", {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      });
 
       console.log(data);
 
@@ -75,7 +73,7 @@ const AgentLayout = ({ children }) => {
 
       {breakpoints.md && (
         <DefaultSider>
-          <Sider  
+          <Sider
             style={{
               // background: "linear-gradient(to-right, #0b3d91, #000000)",
               background: "#191c24",
@@ -85,9 +83,7 @@ const AgentLayout = ({ children }) => {
               bottom: 0,
             }}
           >
-            <h5 className="dark-menu-heading mt-2 text-center">
-              Ticketing System
-            </h5>
+            <h5 className="dark-menu-heading mt-2 text-center">Ticketing System</h5>
             <SideNavs />
           </Sider>
         </DefaultSider>
@@ -96,48 +92,47 @@ const AgentLayout = ({ children }) => {
 
       <Layout>
         {/* headers */}
-        <Header
-          style={{
-            backgroundColor: "#191c24",
-            color: "white",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "20px",
-            alignItems: "center",
-            padding: "20px",
-          }}
-        >
-          {!breakpoints.md && (
-            <div onClick={() => setOpen(true)}> open for mobile</div>
-          )}
-
-          <h6>Welcome {auth?.user?.name}</h6>
-          <Dropdown menu={{ items }}>
-            <Avatar
-              role="button"
+        {!breakpoints.md && (
+          <>
+            <Header
               style={{
-                // background: "linear-gradient(45deg, #0b3d91, #000000)",
-                background: "black",
-
+                backgroundColor: "#191c24",
                 color: "white",
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "20px",
+                alignItems: "center",
+                padding: "20px",
               }}
             >
-              {auth?.user?.name[0]}
-            </Avatar>
-          </Dropdown>
-          <Drawer
-            title="Basic Drawer"
-            placement="left"
-            onClose={onClose}
-            open={open}
-            closable={true}
-            style={{ width: "280px" }}
-          >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </Drawer>
-        </Header>
+              {!breakpoints.md && (
+                <div onClick={() => setOpen(true)}>
+                  <CgMenuLeft size={25} />
+                </div>
+              )}
+
+              {/* <h6>Welcome {auth?.user?.name}</h6> */}
+              {/* <div style={{ alignContent: "end" }}> */}
+              <Dropdown menu={{ items }}>
+                <Avatar
+                  role="button"
+                  style={{
+                    // background: "linear-gradient(45deg, #0b3d91, #000000)",
+                    background: "black",
+
+                    color: "white",
+                  }}
+                >
+                  {auth?.user?.name[0]}
+                </Avatar>
+              </Dropdown>
+              {/* </div> */}
+              <Drawer placement="left" onClose={onClose} open={open} closable={true} style={{ width: "280px", background: "#191c24" }}>
+                <SideNavs />
+              </Drawer>
+            </Header>
+          </>
+        )}
 
         {/* content */}
         <Content

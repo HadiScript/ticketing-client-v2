@@ -4,8 +4,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .sidebar-navs {
@@ -204,4 +203,8 @@ code {
 
 .anticon-close .ant-modal-close-icon {
   fill: white !important;
+}
+
+.ant-drawer-close {
+  color: white !important;
 }

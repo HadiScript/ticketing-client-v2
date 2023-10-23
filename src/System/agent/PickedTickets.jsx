@@ -29,12 +29,7 @@ const PickedTickets = () => {
 
   return (
     <AgentLayout>
-      <DarkBread
-        from={"Agent"}
-        fromIcon={<FaUserSecret className="agent-bread-text" />}
-        to={"Picked Tickets"}
-        toIcon={<CiTimer />}
-      />
+      <DarkBread from={"Agent"} fromIcon={<FaUserSecret className="agent-bread-text" />} to={"Picked Tickets"} toIcon={<CiTimer />} />
 
       <div className="mainHeading mt-4">
         <h2>Development Category Tickets</h2>

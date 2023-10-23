@@ -1,11 +1,11 @@
-import { Modal } from "antd";
+import { Card, Modal } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import Btn from "./Btn";
 import { AuthContext } from "../../context/Auth";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const UpdateProfileComponent = ({ open, setOpen }) => {
+const UpdateProfileComponent = ({ open, setOpen, from = "-" }) => {
   const [auth, setAuth] = useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -67,53 +67,75 @@ const UpdateProfileComponent = ({ open, setOpen }) => {
     }
   };
 
-  return (
-    <Modal
-      title={name}
-      centered
-      open={open}
-      onOk={() => setOpen(false)}
-      onCancel={() => setOpen(false)}
-      width={500}
-      footer={null}
-    >
+  return from === "profile-page" || from === "setting-page" ? (
+    <Card className="cardieBg" style={{ backgroundColor: "#191c24", border: "none" }}>
+      {from === "profile-page" && (
+        <>
+          <div className="form-group py-2">
+            <label className="text-light" for="exampleFormControlInput1">
+              {" "}
+              Your Image
+            </label>
+            <input onChange={() => {}} type="file" accept="images/*" className="form-control" id="exampleFormControlInput1" />
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group py-2">
+                <label className="text-light"> Name </label>
+                <input type="text" className="form-control" placeholder="Company" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group py-2">
+                <label className="text-light"> Email </label>
+                <input type="email" className="form-control" placeholder="Company" name="email" value={email} readOnly />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {from === "setting-page" && (
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-group py-2">
+              <labe className="text-light"> Password </labe>
+              <input type="password" className="form-control" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-group py-2">
+              <label className="text-light"> Confirm Password </label>
+              <input type="password" className="form-control" name="password2" value={password2} onChange={(e) => setPassword2(e.target.value)} />
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="text-end mt-3">
+        <Btn loading={loading} className="btn-active" onClick={onSubmit}>
+          Update Profile
+        </Btn>
+      </div>
+    </Card>
+  ) : (
+    <Modal title={name} centered open={open} onOk={() => setOpen(false)} onCancel={() => setOpen(false)} width={500} footer={null}>
       {/* {loading && "loading..."} */}
       <div className="form-group py-2">
         <label for="exampleFormControlInput1"> Your Image</label>
-        <input
-          onChange={() => {}}
-          type="file"
-          accept="images/*"
-          className="form-control"
-          id="exampleFormControlInput1"
-        />
+        <input onChange={() => {}} type="file" accept="images/*" className="form-control" id="exampleFormControlInput1" />
       </div>
 
       <div className="row">
         <div className="col-md-6">
           <div className="form-group py-2">
             <label> Name </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Company"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" className="form-control" placeholder="Company" name="name" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group py-2">
             <label> Email </label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Company"
-              name="email"
-              value={email}
-              readOnly
-            />
+            <input type="email" className="form-control" placeholder="Company" name="email" value={email} readOnly />
           </div>
         </div>
       </div>
@@ -121,25 +143,13 @@ const UpdateProfileComponent = ({ open, setOpen }) => {
         <div className="col-md-6">
           <div className="form-group py-2">
             <label> Password </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <input type="password" className="form-control" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group py-2">
             <label> Confirm Password </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password2"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-            />
+            <input type="password" className="form-control" name="password2" value={password2} onChange={(e) => setPassword2(e.target.value)} />
           </div>
         </div>
       </div>

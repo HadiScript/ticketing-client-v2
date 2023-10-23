@@ -29,6 +29,12 @@ import SingleTcByManager from "./System/Manager/SingleTcByManager";
 import AssignTickets from "./System/agent/AssignTickets";
 import ResolvedClientTickets from "./System/Client/ResolvedClientTickets";
 import OpenDetailTicket from "./System/Client/OpenDetailTicket";
+import AllAssignedTcs from "./System/Manager/AllAssignedTcs";
+import SingleAssignedTcByManager from "./System/Manager/SingleAssignedTcByManager";
+import AgentDashboard from "./System/agent/AgentDashboard";
+import Check from "./Check";
+import AgentProfile from "./System/agent/AgentProfile";
+import AgentSetting from "./System/agent/AgentSetting";
 
 const App = () => {
   return (
@@ -54,16 +60,21 @@ const App = () => {
         <Route path="/manager/all-users" element={<AllUsersManager />} />
         <Route path="/manager/all-agents" element={<AllAgentManager />} />
         <Route path="/manager/escalate-tickets" element={<EscalateTc />} />
+        <Route path="/manager/assigned-tickets" element={<AllAssignedTcs />} />
         <Route path="/manager/single/:id" element={<SingleTcByManager />} />
+        <Route path="/manager/single/assign/:id" element={<SingleAssignedTcByManager />} />
 
         {/* Agent Routes */}
         <Route path="/agent" element={<Agent />} />
+        <Route path="/agent/dashboard" element={<AgentDashboard />} />
         <Route path="/agent/picked-request" element={<PickedTickets />} />
         <Route path="/agent/handover-tickets" element={<HandoverTickets />} />
         <Route path="/agent/resolved-tickets" element={<ResolvedTc />} />
         <Route path="/agent/ho/single/:id" element={<HandoverSingleTc />} />
         <Route path="/agent/single/:id" element={<SingleTicket />} />
         <Route path="/agent/assign-tickets" element={<AssignTickets />} />
+        <Route path="/agent/profile" element={<AgentProfile />} />
+        <Route path="/agent/settings" element={<AgentSetting />} />
 
         {/* client Routes */}
         <Route path="/client" element={<Client />} />
@@ -71,6 +82,8 @@ const App = () => {
         <Route path="/client/open-request" element={<OpenTickets />} />
         <Route path="/client/resolved-request" element={<ResolvedClientTickets />} />
         <Route path="/client/single-request/:id" element={<OpenDetailTicket />} />
+
+        <Route path="/check" element={<Check />} />
       </Routes>
     </>
   );

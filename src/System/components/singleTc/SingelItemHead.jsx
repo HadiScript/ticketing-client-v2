@@ -34,7 +34,7 @@ const SingelItemHead = ({ id, pickedtAt, single, escalatingTicket, setOpen2, res
             Assign Ticket
           </Button>
         )}
-        {from !== "manager" && (
+        {from !== "manager" && from !== "manager-assiged-tcs" && (
           <Button className="escalated-btn" onClick={escalatingTicket}>
             Escalate Ticket
           </Button>
